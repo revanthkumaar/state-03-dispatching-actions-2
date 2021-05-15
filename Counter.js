@@ -1,11 +1,8 @@
 // Imports: Dependencies
-import React, { Component } from 'react';
-import { Button, Dimensions, SafeAreaView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import React, { Component } from 'react';import { Button, Dimensions, SafeAreaView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { connect } from 'react-redux';
-
 // Screen Dimensions
 const { height, width } = Dimensions.get('window');
-
 // Screen: Counter
 class Counter extends React.Component {
   render() {
@@ -25,7 +22,6 @@ class Counter extends React.Component {
     )
   }
 }
-
 // Styles
 const styles = StyleSheet.create({
   container: {
@@ -60,34 +56,30 @@ const styles = StyleSheet.create({
     marginRight: 40,
   },
 });
-
-
+// Map State To Props (Redux Store Passes State To Component)
 const mapStateToProps = (state) => {
-
-    return {
-        counter: state.counter.counter;
-    }
-
-}
-
-
+  console.log('State:');
+  console.log(state);
+  // Redux Store --> Component
+  return {
+    counter: state.counter.counter,
+  };
+};
+// Map Dispatch To Props (Dispatch Actions To Reducers. Reducers Then Modify The Data And Assign It To Your Props)
 const mapDispatchToProps = (dispatch) => {
-
-    return {
-
-        reduxIncreaseCounter: () => dipatch({
-            type: 'INCREASE_COUNTER',
-            value: 1
-        }),
-        reduxDecreaseCounter: () => dipatch({
-            type: 'DECREASE_COUNTER',
-            value:2
-        })
-
-    }
-}
-
-
-
-
+  // Action
+  return {
+    // Increase Counter
+    reduxIncreaseCounter: () => dispatch({
+      type: 'INCREASE_COUNTER',
+      value: 1,
+    }),
+    // Decrease Counter
+    reduxDecreaseCounter: () => dispatch({
+      type: 'DECREASE_COUNTER',
+      value: 1,
+    }),
+  };
+};
+// Exports
 export default connect(mapStateToProps, mapDispatchToProps)(Counter);
